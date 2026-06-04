@@ -61,11 +61,26 @@ reproducible: `python scripts/generate_hr_data.py`.
 
 ## Project stages
 
-| Stage | What | Where |
-|-------|------|-------|
-| 1. Data cleaning | Fix dates, dedupe, standardise categories, handle missing values | `notebooks/01_cleaning.ipynb` |
-| 2. SQL analysis  | Joins, CTEs, window functions, org-hierarchy self-joins | `sql/` |
-| 3. Exploratory analysis | Attrition / performance / pay analysis + insight | `notebooks/02_analysis.ipynb` |
-| 4. Dashboard | Interactive summary for stakeholders | Looker Studio (linked) |
+| Stage | What | Where | Status |
+|-------|------|-------|--------|
+| 1. Data cleaning | Fix dates, dedupe, standardise categories, handle missing values, validate integrity | `notebooks/01_data_cleaning.ipynb` (explained) + `scripts/clean_hr_data.py` (production) | ✅ Done |
+| 2. SQL analysis  | Joins, CTEs, window functions, org-hierarchy self-joins | `sql/` | In progress |
+| 3. Exploratory analysis | Attrition / performance / pay analysis + insight | `notebooks/02_analysis.ipynb` | Planned |
+| 4. Dashboard | Interactive summary for stakeholders | Looker Studio (linked) | Planned |
 
 *Each stage is documented with the business question it answers and the takeaway.*
+
+### Stage 1 — Data cleaning (done)
+
+The raw exports in `data/raw/` carry realistic problems: duplicate rows, mixed
+date formats, inconsistent gender/status labels, salaries stored as text
+(`Rp30.100.000`), stray whitespace, and missing values. The cleaning stage:
+
+- removes duplicates, standardises text/casing, maps categories to canonical values,
+- parses mixed date formats into ISO dates, converts text-encoded numbers to numerics,
+- handles missing values deliberately (fills only where a default is valid; never invents measured values),
+- locks in types and runs **referential-integrity validation** (unique keys, valid foreign keys, real managers).
+
+Two parallel implementations: a **step-by-step notebook** that explains every
+decision, and a **modular production script** that runs the same pipeline
+end-to-end. Output lands in `data/clean_rebuilt/`.
