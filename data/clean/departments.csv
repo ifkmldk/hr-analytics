@@ -1,0 +1,11 @@
+dept_id,dept_name,division,salary_band_mid
+1,Engineering,Technology,28
+2,Data & Analytics,Technology,26
+3,Product,Technology,27
+4,Design,Technology,22
+5,Sales,Commercial,20
+6,Marketing,Commercial,19
+7,Customer Success,Commercial,15
+8,Finance,Operations,21
+9,People & Culture,Operations,18
+10,Operations,Operations,16
