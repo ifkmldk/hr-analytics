@@ -5,3 +5,4 @@ faker>=20.0
 jupyter
 nbformat
 nbconvert
+ipykernel

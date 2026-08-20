@@ -1,3 +1,17 @@
 {
-    "python-envs.defaultEnvManager": "ms-python.python:system"
+  // Tunjuk langsung ke .venv proyek ini - VS Code tidak perlu menebak,
+  // dan tidak akan menawarkan interpreter lain.
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
+  "python.terminal.activateEnvironment": true,
+
+  // Notebook: pakai kernel dari .venv, jangan tanya tiap kali.
+  "jupyter.kernels.filter": [
+    {
+      "path": "${workspaceFolder}/.venv/Scripts/python.exe",
+      "type": "pythonEnvironment"
+    }
+  ],
+
+  // Jangan tawarkan bikin env baru tiap buka folder.
+  "python.createEnvironment.trigger": "off"
 }

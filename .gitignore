@@ -1,0 +1,13 @@
+# Virtualenv - JANGAN di-commit
+.venv/
+venv/
+env/
+
+# Cache Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+
+# Rahasia
+.env
